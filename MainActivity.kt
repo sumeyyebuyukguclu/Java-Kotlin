@@ -25,4 +25,5 @@ class MainActivity : AppCompatActivity() {
             To take care of me and shower with love
         """.trimIndent()
     }
+    
 }
