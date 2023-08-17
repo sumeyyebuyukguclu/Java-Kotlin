@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "556541197163",
+    "project_id": "engelsizsehir-53ab5",
+    "storage_bucket": "engelsizsehir-53ab5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556541197163:android:e2abf639c2b0b6e53dea2e",
+        "android_client_info": {
+          "package_name": "com.sumeyyebuyukguclu.engelsizsehr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556541197163-bs63if5hmgc7hr2ep2hrcftfmu1ttl2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEg0ad10OP2QiQSC5pO0_Zbyl1ueTbD1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556541197163-bs63if5hmgc7hr2ep2hrcftfmu1ttl2f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
