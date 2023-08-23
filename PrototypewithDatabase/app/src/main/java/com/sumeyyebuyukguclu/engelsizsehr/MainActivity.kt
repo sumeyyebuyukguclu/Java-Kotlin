@@ -7,8 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.sumeyyebuyukguclu.engelsizsehr.databinding.ActivityMainBinding
 
-
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -17,8 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        println("checkuser-1")
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
@@ -31,13 +27,11 @@ class MainActivity : AppCompatActivity() {
     fun signInClicked(view: View) {
             val userEmail = binding.EmailText.text.toString()
             val password = binding.PasswordText.text.toString()
-            println("checkuser0")
 
             if (userEmail.isNotEmpty() && password.isNotEmpty()) {
                 val isSignInSuccessful = dbHelper.checkUser(userEmail, password)
-                println("checkuser çıktı")
+
                 if (isSignInSuccessful) {
-                    println("geldi")
                     val intent = Intent(applicationContext, FeedActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -51,7 +45,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    fun checkPassword(password: String): Boolean {
+        val uppercasePattern = Regex("[A-Z]")
 
+        return password.length >= 6 && password.contains(uppercasePattern)
+    }
 
     fun signUpClicked(view: View) {
 
@@ -60,13 +58,24 @@ class MainActivity : AppCompatActivity() {
 
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            val isAlreadyHas = dbHelper.checkUser(email, password)
-            if(isAlreadyHas){
-                Toast.makeText(
-                    applicationContext,
-                    "Kullanıcı zaten mevcut",
-                    Toast.LENGTH_LONG
-                ).show()
+            val isAlreadyHas = dbHelper.checkUserAlreadyHas(email)
+            val isPasswordOkey = checkPassword(password)
+            if(isAlreadyHas || !isPasswordOkey){
+                if(isAlreadyHas){
+                    Toast.makeText(
+                        applicationContext,
+                        "Kullanıcı zaten mevcut",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else if(!isPasswordOkey)
+                {
+                    Toast.makeText(
+                        applicationContext,
+                        "Şifre en az 6 karakter ve 1 büyük harf içermelidir.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
             else {
                 val isUserAdded = dbHelper.addUser(email, password)

@@ -12,17 +12,28 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "user_credentials.d
         db.execSQL("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)")
     }
 
-    fun checkUser(email: String, password: String): Boolean {
-        println("checkuser1")
+    fun checkUserAlreadyHas(email: String): Boolean {
         val db = this.readableDatabase
-        val query = "SELECT * FROM users WHERE username = '$email' AND password = '$password'"
-        println("checkuser2")
+        val query = "SELECT * FROM users WHERE username = '$email'"
 
         val cursor = db.rawQuery(query, null)
-        println("checkuser3")
 
         val result = cursor.count > 0
-        println("checkuser4")
+
+        cursor.close()
+        db.close()
+
+        println(result)
+        return result
+    }
+
+    fun checkUser(email: String, password: String): Boolean {
+        val db = this.readableDatabase
+        val query = "SELECT * FROM users WHERE username = '$email' AND password = '$password'"
+
+        val cursor = db.rawQuery(query, null)
+
+        val result = cursor.count > 0
 
         cursor.close()
         db.close()
